@@ -6,7 +6,7 @@ var Variant     = require('../models/variant');
 var mongoose    = require('mongoose');
 //mongoose.connect('mongodb://localhost/shoppingApp');
 //mongoose.connect('mongodb://localhost/myShoppingApp3', { useNewUrlParser: true, useCreateIndex: true, });
-mongoose.connect('mongodb://localhost/myShoppingApp3');
+mongoose.connect('mongodb://user1:test123@ds033750.mlab.com:33750/shopping_app_mongo');
 
 
 var categories =
