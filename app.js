@@ -15,7 +15,7 @@ var passport          = require('passport');
 var MongoStore        = require('connect-mongo')(session);
 var mongoose          = require('mongoose');
 
-mongoose.connect('mongodb://localhost/myShoppingApp3');
+mongoose.connect('mongodb://user1:test123@ds033750.mlab.com:33750/shopping_app_mongo');
 //mongoose.connect('mongodb://localhost/myShoppingApp3', { useNewUrlParser: true, useCreateIndex: true, });
 
 
