@@ -28,17 +28,12 @@ install the dependencies in package.json file by executing "npm install" in the 
 	or visit
 	http://134.117.216.140:3000/users/login
 
-	Artyom_Morozov //instance name
-	192.168.50.194 //fixed IP address
-	134.117.216.140 //floating IP address
 #
 ==================================================================
 GENERAL INSTRUCTIONS
 ==================================================================
 #
-Look for Problem 1 solution in cart.js file
-Look for Problem 2 solution in checkout.js file
-Look for Problem 3 solution in checkout.js file  
+ 
 
 Paypal Sandbox accout:
 login: sviktam1-buyer@gmail.com
