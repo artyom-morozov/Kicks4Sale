@@ -1,0 +1,84 @@
+<div class="row">
+    <div class="col-md-6">
+        <div class="product-image">
+            <img src="{{product.imagePath}}" id="p-img">
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="product-details-wrapper white-box pad20 border-bottom-dashed">
+            <div class="product-title title"><h1>{{product.title}}</h1></div>
+            <div class="product-description">{{product.description}}</div>
+            <div class="product-price">${{product.price}} CAD</div>
+        </div>
+
+        <div class="product-details-wrapper white-box pad20">
+            <div class="product-variant-wrapper">
+                <label for="product-color">Colour:</label>
+                <span id="product-color">{{product.color}}</span>
+                <div class="product-variants">
+                    <div class="product-variant-color">
+                        <a href="#" onclick="changeVariant('{{product.imagePath}}', '{{product.color}}', '{{product.size}}', '{{product._id}}', '{{product.quantity}}')"><img src="{{product.imagePath}}"></a>
+                    </div>
+                    {{#each variants}}
+                        <div class="product-variant-color">
+                            <a href="#" onclick="changeVariant('{{imagePath}}', '{{color}}', '{{size}}', '{{_id}}', '{{quantity}}')"><img src="{{imagePath}}"></a>
+                        </div>
+                    {{/each}}
+                </div>
+            </div>
+            <div class="product-size-wrapper" id="product-size-wrp">
+                <label for="product-size">Size:</label>
+                <input id="sizes" value="{{product.size}}" hidden>
+                <select id="product-size" class="white-box border-around">
+                    
+                </select>
+
+                <script>
+                        var size = document.getElementById("sizes")
+                        if (size.value == "")
+                        {
+                            document.getElementById("product-size-wrp").style.display = "none";
+                        }
+                        else
+                        {
+                            document.getElementById("product-size-wrp").style.display = "block";
+                            var sizeArray = size.value.split(",")
+                            var sizeList = document.getElementById("product-size")
+                            for (var i = sizeList.options.length -1 ; i > -1; i--) {
+                                sizeList.options[i] = null;
+                            }
+                            for (var i = 0; i < sizeArray.length; i++) {
+                                var option = document.createElement("option")
+                                option.value = sizeArray[i]
+                                option.innerHTML = sizeArray[i]
+                                sizeList.appendChild(option)
+                            }
+                        }
+                    
+                </script>
+            </div>
+
+            <div class="product-action-buttons">
+                {{#if qty}}
+                    <div id="inventory-buy" class="inventory-buy" style="display:block">
+                        <a href="/add-to-bag/{{product._id}}" id="add-to-bag-link" class="btn btn-primary pad10"><i class="fa fa-shopping-basket" aria-hidden="true"></i> Add to bag</a>
+                        <a href="/checkout/buy-now/{{product._id}}" id="buy-now-link" class="btn btn-danger pad10"><i class="fa fa-bolt" aria-hidden="true"></i> Buy now</a>
+                    </div>
+                    <div id="soldout" class="soldout" style="display:none">
+                        sold out
+                    </div>
+                {{else}}
+                    {{!-- <a href="" id="add-to-bag-link" class="btn btn-primary pad10"><i class="fa fa-shopping-basket" aria-hidden="true"></i> Add to bag</a>
+                    <a href="" id="buy-now-link" class="btn btn-danger pad10"><i class="fa fa-bolt" aria-hidden="true"></i> Buy now</a> --}}
+                    <div id="inventory-buy" class="inventory-buy" style="display:none">
+                        <a href="/add-to-bag/{{product._id}}" id="add-to-bag-link" class="btn btn-primary pad10"><i class="fa fa-shopping-basket" aria-hidden="true"></i> Add to bag</a>
+                        <a href="/checkout/buy-now/{{product._id}}" id="buy-now-link" class="btn btn-danger pad10"><i class="fa fa-bolt" aria-hidden="true"></i> Buy now</a>
+                    </div>
+                    <div id="soldout" class="soldout" style="display:block">
+                        sold out
+                    </div>
+                {{/if}}
+            </div>
+        </div>
+    </div>
+</div>

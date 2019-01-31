@@ -1,0 +1,50 @@
+<table class="table">
+    <thead>
+        <tr>
+            <th class="text-left">Title</th>
+            <th class="text-center">Qty</th>
+            <th class="text-right">Price</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each items}}
+            <tr>
+                <td class="text-left">{{this.item.title}}</td>
+                <td class="text-center">{{this.qty}}</td>
+                <td class="text-right">${{this.price}}</td>
+            </tr>
+        {{/each}}
+    </tbody>
+</table>
+<div class="discount-code-wrapper">
+    <form action="/checkout/apply-discount" method="POST">
+        <div class="discount-code"><span>Discount Code: </span><input type="text" name="discountCode" class="discount-form-control">
+            <button type="submit" class="btn btn-danger">Apply</button>
+        </div>
+        {{#if msg}}
+            <span class="discount-error">{{msg}}</span>
+        {{/if}}
+    </form>
+</div>
+<div class="payment-total-wrapper">
+    {{#if discountPercentage}}
+    <div class="discount-wrapper">
+        <div class="discount-details">
+            <div><span>${{discountPercentage}}%</span><span class="discount-title">Discount Percentage: </span></div>
+            {{#if actualPrice}}
+                <div><span>${{actualPrice}}</span><span class="discount-title">Total Price: </span></div>
+            {{/if}}
+            {{#if totalDiscount}}
+                <div><span>${{totalDiscount}}</span><span class="discount-title">Total Discount: </span></div>
+            {{/if}}
+        </div>
+    </div>
+    {{/if}}
+    {{#if totalPriceAfterDiscount}}
+        <div class="total-amount"><span>Total After Discount: </span>${{totalPriceAfterDiscount}}</div>
+    {{else}}
+        <div class="total-amount"><span>Total: </span>${{totalPrice}}</div>
+    {{/if}}
+
+    
+</div>

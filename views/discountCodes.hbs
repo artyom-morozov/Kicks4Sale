@@ -1,0 +1,39 @@
+<div class="white-box pad20">
+    <div class="page-header admin-page-header title border-bottom">
+        <div class="page-header-back-button">
+            <a href="/dashboard"><i class="fa fa-angle-left" aria-hidden="true"></i></a>
+        </div>
+        <div class="page-header-content">
+            <h1>{{title}}</h1>
+            <small class="title">Add, update or delete discount code(s)</small>
+        </div>
+        <div class="page-header-action add-new-inventory mar20">
+            <a href="/dashboard/insert-discount-code" class="btn btn-primary pad10">Add a new discount code</a>
+        </div>
+    </div>
+    {{#if discounts}}
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Discount Code</th>
+                <th>Discount Description</th>
+                <th>Discount Percentage</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody class="bordered-tbody">
+            {{#each discounts}}
+                <tr>
+                    <th scope="row">{{code}}</th>
+                    <td>{{description}}</td>
+                    <td>{{percentage}}%</td>
+                    <td>
+                        <a href="/dashboard/delete-discount-code/{{_id}}">Delete</a>
+                    </td>
+                </tr>
+            {{/each}}
+        </tbody>
+    </table>
+    {{/if}}
+    No discount code
+</div>

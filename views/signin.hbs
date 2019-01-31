@@ -1,0 +1,60 @@
+<div class="image-slider">
+  <div id="slides">
+    <div class="slides-container">
+      <img src="/images/bg.jpg">
+      <img src="/images/bg2.jpg">
+    </div>
+  </div>
+</div>
+
+<div class="row login-wrapper">
+    <div class="col-sm-4 col-centered">
+        <div class="registration-form border-around rad5 pad20">
+            <div class="logo">
+                <a href="/"><img src="/images/logo.png"></a>
+            </div>
+            <div class="registration-form-items">
+                {{#if errors}}
+                    {{#each errors}}
+                        <div class="alert alert-danger alert-dismissible" role="alert">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            {{msg}}
+                        </div>
+                    {{/each}}
+                {{/if}}
+                <form method="POST" action="/users/signin">
+                    <div class="login-title title border-bottom">Login</div>
+                    <div class="form-group">
+                        <label for="fullNameField">Full name</label>
+                        <input type="text" class="form-control" name="fullNameField" placeholder="Full Name">
+                    </div>
+                    <div class="form-group">
+                        <label for="usernameField">Email address</label>
+                        <input type="email" class="form-control" name="username" placeholder="Email">
+                    </div>
+                    <div class="form-group">
+                        <label for="passwordField">Password</label>
+                        <input type="password" class="form-control" name="password" placeholder="Password">
+                    </div>
+                    <div class="form-group">
+                        <label for="verifyPasswordField">Verify Password</label>
+                        <input type="password" class="form-control" name="verifyPasswordField" placeholder="Verify Password">
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary full-width">SIGNIN</button>
+
+                    <div class="login-page-register-link">Do you have an account? <a href="/users/login">Login</a></div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function() {
+        $('#slides').superslides({
+        play: 5000,
+        animation: 'fade'
+        });
+    });
+</script>

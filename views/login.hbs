@@ -1,0 +1,62 @@
+<div class="image-slider">
+  <div id="slides">
+    <div class="slides-container">
+      <img src="/images/bg.jpg">
+      <img src="/images/bg2.jpg">
+    </div>
+  </div>
+</div>
+
+<div class="row login-wrapper">
+    <div class="col-sm-4 col-centered">
+        <div class="registration-form border-around rad5 pad20">
+            <div class="logo">
+                <a href="/"><img src="/images/logo.png"></a>
+            </div>
+            <div class="registration-form-items">
+                <form method="POST" action="/users/login">
+                    {{#if success_msg}}
+                    <div class="alert alert-success alert-dismissible" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        {{success_msg}}
+                    </div>
+                    {{/if}}
+                    {{#if error_msg}}
+                    <div class="alert alert-warning alert-dismissible" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        {{error_msg}}
+                    </div>
+                    {{/if}}
+                    {{#if error}}
+                    <div class="alert alert-warning alert-dismissible" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        {{error}}
+                    </div>
+                    {{/if}}
+                    <div class="login-title title border-bottom">Login</div>
+                    <div class="form-group">
+                        <label for="usernameField">Email</label>
+                        <input type="text" class="form-control" name="username" placeholder="Email">
+                    </div>
+                    <div class="form-group">
+                        <label for="passwordField">Password</label>
+                        <input type="password" class="form-control" name="password" placeholder="Password">
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary full-width">LOGIN</button>
+
+                    <div class="login-page-register-link">Don't you have an account? <a href="/users/signin">Signin</a></div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function() {
+        $('#slides').superslides({
+        play: 5000,
+        animation: 'fade'
+        });
+    });
+</script>

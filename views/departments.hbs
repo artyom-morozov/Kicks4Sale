@@ -1,0 +1,35 @@
+<div class="white-box pad20">
+    <div class="page-header admin-page-header title border-bottom">
+        <div class="page-header-back-button">
+            <a href="/dashboard"><i class="fa fa-angle-left" aria-hidden="true"></i></a>
+        </div>
+        <div class="page-header-content">
+            <h1>{{title}}</h1>
+            <small class="title">Add, update or delete department(s)</small>
+        </div>
+        <div class="page-header-action add-new-inventory mar20">
+            <a href="/dashboard/insert-department" class="btn btn-primary pad10">Add a new department</a>
+        </div>
+    </div>
+    
+    
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Department Name</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody class="bordered-tbody">
+            {{#each departments}}
+                <tr>
+                    <td>{{departmentName}}</td>
+                    <td>
+                        <a href="/dashboard/update-department/{{_id}}">Update</a> | 
+                        <a href="/dashboard/delete-department/{{_id}}">Delete</a>
+                    </td>
+                </tr>
+            {{/each}}
+        </tbody>
+    </table>
+</div>

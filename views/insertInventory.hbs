@@ -1,0 +1,108 @@
+<div class="white-box pad20">
+    <div class="page-header admin-page-header title border-bottom">
+        <div class="page-header-back-button">
+            <a href="/dashboard/inventory"><i class="fa fa-angle-left" aria-hidden="true"></i></a>
+        </div>
+        <div class="page-header-content">
+            <h1>Add an inventory</h1>
+            <small class="title">This is also a variant</small>
+        </div>
+        <div class="page-header-action add-new-inventory mar20">
+            <a href="/dashboard/inventory" class="btn btn-default pad10">Cancel</a>
+            <button type="submit" class="btn btn-primary pad10" onclick="insertProductPost()">Save</button>
+        </div>
+    </div>
+    
+    
+    <div class="item-group">
+        <div class="form-group">
+            <label for="imagePath">Product Image Link</label>
+            <input type="text" class="form-control" name="imagePath" id="imagePath" required>
+        </div>
+
+        <div class="form-group">
+            <label for="title">Product Title</label>
+            <input type="text" class="form-control" name="title" id="product-title" required>
+        </div>
+
+        <div class="form-group">
+            <label for="description">Product Description</label>
+            <textarea class="form-control" rows="5" name="description" id="product-description"></textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="price">Product Price</label>
+            <input type="text" class="form-control" name="price" id="product-price" required>
+        </div>
+
+        <div class="form-group">
+            <label for="category">Department</label>
+            
+            <div class="row">
+                <div class="col-md-6">
+                    <label for="selectedDepartments">Selected Departments <small>(Drag and drop from all departments)</small></label>
+                    <div class="draggable-area" id="draggable-area" ondrop="dropDepartment(event)" name="selectedDepartments" ondragover="allowDrop(event)"></div>
+                </div>
+                <div class="col-md-6">
+                    <label for="allDepartments">All Departments (Choose one)</label>
+                    {{#if departments}}
+                        <div class="draggable-area" id="draggable-area-departments" name="allDepartments" ondrop="dropRemove(event)" ondragover="allowDrop(event)">
+                            {{#each departments}}
+                                <p id="{{departmentName}}" class="draggable-item" draggable="true" ondragstart="drag(event)">{{departmentName}}</p>
+                            {{/each}}
+                        </div>
+                    {{else}}
+                        <a href="/dashboard/insert-department" class="btn btn-danger pad10">Add a new department</a>
+                    {{/if}}
+                </div>
+            </div>
+
+
+        </div>
+
+        <div class="form-group" id="categories-wrapper" style="display:none">
+            <label for="tags">Categories</label>
+            
+            <div class="row">
+                <div class="col-md-6">
+                    <label for="selectedCategories">Selected Categories <small>(Drag and drop from all categories)</small></label>
+                    <div class="draggable-area" id="draggable-area-selected" ondrop="dropSelectedCategories(event)" name="selectedCategories" ondragover="allowDrop(event)"></div>
+                </div>
+                <div class="col-md-6">
+                    <label for="allCategories">All Categories (Choose one)</label>
+                    <div class="draggable-area" id="draggable-area-Categories" name="allCategories" ondrop="drop(event)" ondragover="allowDrop(event)">
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group" id="categories-wrapper-empty-category" style="display:none">
+            <p style="color:red">There is no category available for selected department but you can update it without any category</p>
+        </div>
+
+        <div class="form-group">
+            <label for="color">Colour <small>(Requires only one. Example: Red)</small></label>
+            <input type="text" class="form-control" name="color" id="product-color" required>
+        </div>
+
+        <div class="form-group">
+            <label for="size">Size</label>
+            <div class="size-wrapper">
+                <div><input type="checkbox" name="size" value="XS">XS</div>
+                <div><input type="checkbox" name="size" value="S">S</div>
+                <div><input type="checkbox" name="size" value="M">M</div>
+                <div><input type="checkbox" name="size" value="L">L</div>
+                <div><input type="checkbox" name="size" value="XL">XL</div>
+            </div>
+            <!--<input type="text" class="form-control" name="size" required>-->
+        </div>
+
+        <div class="form-group">
+            <label for="quantity">Quantity</label>
+            <input type="text" class="form-control" name="quantity" id="product-quantity" required>
+        </div>
+    </div>
+</div>
+
+

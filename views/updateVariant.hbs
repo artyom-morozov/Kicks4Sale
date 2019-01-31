@@ -1,0 +1,129 @@
+<form action="/dashboard/update-variant/{{variant._id}}" method="POST">
+    <div class="white-box pad20 mar20">
+        <div class="page-header admin-page-header title border-bottom" style="margin-bottom:0px;">
+            <div class="page-header-back-button">
+                <a href="/dashboard/inventory"><i class="fa fa-angle-left" aria-hidden="true"></i></a>
+            </div>
+            <div class="page-header-content">
+                <h1>Update Variant</h1>
+                <small class="title"></small>
+            </div>
+            <div class="page-header-action add-new-inventory mar20">
+                <a href="/dashboard/inventory" class="btn btn-default pad10">Cancel</a>
+                <button type="submit" class="btn btn-primary pad10">Save</button>
+            </div>
+        </div>
+    </div>
+        
+    <div class="row">
+        <div class="col-md-8">
+            <div class="white-box pad20 mar20">
+                <div class="item-group">
+                    <div class="form-group">
+                        <label for="imagePath">Product Image Link</label>
+                        <input type="text" class="form-control" name="imagePath" value="{{variant.imagePath}}" id="imagePath" onkeyup="updatePreviewBox('imagePath', 'preview-product-image')">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="color">Colour <small>(Requires only one. Example: Red)</small></label>
+                        <input type="text" class="form-control" name="color" required  value="{{variant.color}}">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="size">Size</label>
+                        <div class="size-wrapper">
+                            <input id="sizes" hidden value="{{variant.size}}">
+                            <div><input type="checkbox" name="size" id="sizexs" value="XS">XS</div>
+                            <div><input type="checkbox" name="size" id="sizess" value="S">S</div>
+                            <div><input type="checkbox" name="size" id="sizem" value="M">M</div>
+                            <div><input type="checkbox" name="size" id="sizel" value="L">L</div>
+                            <div><input type="checkbox" name="size" id="sizexl" value="XL">XL</div>
+                        </div>
+                        <script>
+                            var sizes = document.getElementById("sizes").value.split(",");
+                            for(var i = 0; i < sizes.length; i++)
+                            {
+                                if (sizes[i] == "XS") document.getElementById("sizexs").checked = true;
+                                else if (sizes[i] == "S") document.getElementById("sizess").checked = true;
+                                else if (sizes[i] == "M") document.getElementById("sizem").checked = true;
+                                else if (sizes[i] == "L") document.getElementById("sizel").checked = true;
+                                else if (sizes[i] == "XL") document.getElementById("sizexl").checked = true;
+                                
+                            }
+                        </script>
+
+
+                        <!--<input type="text" class="form-control" name="size" required>-->
+                    </div>
+
+                    <div class="form-group">
+                        <label for="quantity">Quantity</label>
+                        <input type="text" class="form-control" name="quantity" required  value="{{variant.quantity}}">
+                    </div>
+                </div>
+            </div>
+
+            <div class="white-box pad20">
+                <div class="product-variant-wrapper">
+                    <div class="page-header admin-page-header title border-bottom">
+                        <div class="page-header-content" style="margin-top: -6px;">
+                            <h1>Related Product</h1>
+                        </div>
+                        <div class="page-header-action add-new-inventory mar20">
+                            <a href="/dashboard/update-inventory/{{product._id}}" class="btn btn-danger pad10">Update Original Product</a>
+                        </div>
+                    </div>
+                    <div class="">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Image</th>
+                                    <th>Color</th>
+                                    <th>Size</th>
+                                    <th>Quantity</th>
+                                    <th>Price</th>
+                                </tr>
+                            </thead>
+                            <tbody class="bordered-tbody">
+                                <tr>
+                                    <td><img src="{{product.imagePath}}" width="20"></td>
+                                    <td>{{product.color}}</td>
+                                    <td>{{product.size}}</td>
+                                    <td>{{product.quantity}}</td>
+                                    <td>${{product.price}} CAD</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                        
+                    
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="white-box pad20 mar20">
+                <div class="original-product-wrapper">
+                    <div class="product-preview-title wrapper-title title text-center"><h4>Product Preview</h4></div>
+                    <div class="product-image" id="preview-product-image"><img src="{{variant.imagePath}}" id="product-image"></div>
+                    <div class="preview-product-title title" id="preview-product-title">{{product.title}}</div>
+                    <div class="preview-product-description" id="preview-product-description">{{product.description}}</div>
+                    <div class="preview-product-price" id="preview-product-price">${{product.price}} CAD</div>
+                </div>
+            </div>
+
+            <div class="white-box pad20 mar20 additional-save-button">
+                <a href="/dashboard/inventory" class="btn btn-default pad10">Cancel</a>
+                <button type="submit" class="btn btn-primary pad10">Save</button>
+            </div>
+        </div>
+    </div>
+</form>
+
+
+
+
+
+
+
+
+

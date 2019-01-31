@@ -1,0 +1,50 @@
+<div class="white-box pad20">
+        <div class="page-header admin-page-header title border-bottom">
+            <div class="page-header-back-button">
+                <a href="/dashboard/departments"><i class="fa fa-angle-left" aria-hidden="true"></i></a>
+            </div>
+            <div class="page-header-content">
+                <h1>Add a department</h1>
+                <small class="title">More department more customer</small>
+            </div>
+            <div class="page-header-action add-new-inventory mar20">
+                <a href="/dashboard/departments" class="btn btn-default pad10">Cancel</a>
+                <button type="submit" class="btn btn-primary pad10" onclick="sendPostRequest(event)">Save</button>
+            </div>
+        </div>
+        
+        
+        <div class="item-group">
+            <div class="form-group">
+                <label for="departmentName">Department Name</label>
+                <input type="text" class="form-control" name="departmentName" id="departmentName">
+            </div>
+
+            <div class="form-group drag-and-drop">
+                
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <label for="selectedCategories">Selected Categories <small>(Drag and drop from all categories)</small></label>
+                        <div class="draggable-area" id="draggable-area" ondrop="drop(event)" name="selectedCategories" ondragover="allowDrop(event)"></div>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="allCategories">All Categories</label>
+                        {{#if categories}}
+                            <div class="draggable-area" id="draggable-area-Categories" name="allCategories" ondrop="drop(event)" ondragover="allowDrop(event)">
+                                {{#each categories}}
+                                    <p id="{{categoryName}}" class="draggable-item" draggable="true" ondragstart="drag(event)">{{categoryName}}</p>
+                                {{/each}}
+                            </div>
+                        {{else}}
+                            <a href="/dashboard/insert-category" class="btn btn-danger pad10">Add a new category</a>
+                        {{/if}}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+</div>
+
+
+

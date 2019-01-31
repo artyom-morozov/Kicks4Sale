@@ -1,0 +1,44 @@
+<div class="white-box pad20">
+    <div class="page-header admin-page-header title border-bottom">
+        <div class="page-header-back-button">
+            <a href="/dashboard"><i class="fa fa-angle-left" aria-hidden="true"></i></a>
+        </div>
+        <div class="page-header-content">
+            <h1>{{title}}</h1>
+            <small class="title">Add, update or delete product(s)</small>
+        </div>
+        <div class="page-header-action add-new-inventory mar20">
+            <a href="/dashboard/insert-inventory" class="btn btn-primary pad10">Add a new inventory</a>
+        </div>
+    </div>
+    
+    
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Image</th>
+                <th>Title</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody class="bordered-tbody">
+            {{#each products}}
+                <tr>
+                    <th scope="row">{{_id}}</th>
+                    <td><img src="{{imagePath}}" width="20"></td>
+                    <td>{{title}}</td>
+                    <td>{{quantity}}</td>
+                    <td>${{price}}</td>
+                    <td>
+                        <a href="/dashboard/add-variant/{{_id}}">Add Variant</a> | 
+                        <a href="/dashboard/update-inventory/{{_id}}">Update</a> | 
+                        <a href="/dashboard/delete-inventory/{{_id}}">Delete</a>
+                    </td>
+                </tr>
+            {{/each}}
+        </tbody>
+    </table>
+</div>

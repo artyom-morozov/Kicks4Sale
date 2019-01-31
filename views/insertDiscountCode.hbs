@@ -1,0 +1,38 @@
+<div class="white-box pad20">
+    <form action="/dashboard/insert-discount-code" method="POST">
+        <div class="page-header admin-page-header title border-bottom">
+            <div class="page-header-back-button">
+                <a href="/dashboard/discount-codes"><i class="fa fa-angle-left" aria-hidden="true"></i></a>
+            </div>
+            <div class="page-header-content">
+                <h1>Add a discount code</h1>
+                <small class="title">Best way to improve sales</small>
+            </div>
+            <div class="page-header-action add-new-inventory mar20">
+                <a href="/dashboard/departments" class="btn btn-default pad10">Cancel</a>
+                <button type="submit" class="btn btn-primary pad10">Save</button>
+            </div>
+        </div>
+        
+        
+        <div class="item-group">
+            <div class="form-group">
+                <label for="code">Discount Code</label>
+                <input type="text" class="form-control" name="code" id="discountCode" required>
+                <button class="btn btn-success" style="margin-top:10px;" type="button" onclick="discountCodeGenerator()">Generate discount code</button>
+            </div>
+
+            <div class="form-group">
+                <label for="description">Discount Description</label>
+                <textarea class="form-control" rows="5" name="description"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="price">Discount Percentage</label>
+                <input type="number" class="form-control" name="percentage" required>
+            </div>
+        </div>
+    </form>
+</div>
+
+

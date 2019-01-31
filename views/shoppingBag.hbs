@@ -1,0 +1,20 @@
+<div class="row">
+    <div class="col-md-12 col-centered">
+        <div class="shopping-bag-wrapper border-around white-box pad20">
+            <div class="bag-title title">
+                <h1>Shopping Bag</h1>
+            </div>
+            {{#if items}}
+                {{>shoppingBagItemList}}
+
+                <div class="checkout">
+                    <a href="/checkout" class="btn btn-primary">Checkout</a>
+                </div>
+            {{else}}
+            <div class="empty-bag">
+                bag is empty
+            </div>
+            {{/if}}
+        </div>
+    </div>
+</div>

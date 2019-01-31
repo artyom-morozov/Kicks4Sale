@@ -1,0 +1,321 @@
+
+    <div class="white-box pad20 mar20">
+        <div class="page-header admin-page-header title border-bottom" style="margin-bottom:0px;">
+            <div class="page-header-back-button">
+                <a href="/dashboard/inventory"><i class="fa fa-angle-left" aria-hidden="true"></i></a>
+            </div>
+            <div class="page-header-content">
+                <h1>Update Product</h1>
+                <small class="title"></small>
+            </div>
+            <div class="page-header-action add-new-inventory mar20">
+                <a href="/dashboard/inventory" class="btn btn-default pad10">Cancel</a>
+                <button type="submit" class="btn btn-primary pad10" onclick="updateProductPost()">Save</button>
+            </div>
+        </div>
+    </div>
+        
+    <div class="row">
+        <div class="col-md-8">
+            <div class="white-box pad20 mar20">
+                <div class="item-group">
+                    <div class="form-group">
+                        <label for="imagePath">Product Image Link</label>
+                        <input type="text" class="form-control" name="imagePath" value="{{product.imagePath}}" id="imagePath" onkeyup="updatePreviewBox('imagePath', 'preview-product-image')">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="title">Product Title</label>
+                        <input type="text" class="form-control" name="title" value="{{product.title}}" id="product-title" onkeyup="updatePreviewBox('product-title', 'preview-product-title')">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="description">Product Description</label>
+                        <textarea class="form-control" rows="5" name="description" id="product-description" onkeyup="updatePreviewBox('product-description', 'preview-product-description')">{{product.description}}</textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="price">Product Price</label>
+                        <input type="text" class="form-control" name="price" value="{{product.price}}" id="product-price" onkeyup="updatePreviewBox('product-price', 'preview-product-price')">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="category">Department</label>
+                        
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label for="selectedDepartments">Selected Departments <small>(Drag and drop from all departments)</small></label>
+                                <div class="draggable-area" id="draggable-area" ondrop="dropDepartment(event)" name="selectedDepartments" ondragover="allowDrop(event)"></div>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="allDepartments">All Departments (Choose one)</label>
+                                {{#if departments}}
+                                    <div class="draggable-area" id="draggable-area-departments" name="allDepartments" ondrop="dropRemove(event)" ondragover="allowDrop(event)">
+                                        {{#each departments}}
+                                            <p id="{{departmentName}}" class="draggable-item" draggable="true" ondragstart="drag(event)">{{departmentName}}</p>
+                                        {{/each}}
+                                    </div>
+                                {{else}}
+                                    <a href="/dashboard/insert-department" class="btn btn-danger pad10">Add a new department</a>
+                                {{/if}}
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                    <div class="form-group" id="categories-wrapper" style="display:none">
+                        <label for="tags">Categories</label>
+                        
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label for="selectedCategories">Selected Categories <small>(Drag and drop from all categories)</small></label>
+                                <div class="draggable-area" id="draggable-area-selected" ondrop="dropSelectedCategories(event)" name="selectedCategories" ondragover="allowDrop(event)"></div>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="allCategories">All Categories (Choose one)</label>
+                                <div class="draggable-area" id="draggable-area-Categories" name="allCategories" ondrop="drop(event)" ondragover="allowDrop(event)">
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group" id="categories-wrapper-empty-category" style="display:none">
+                        <p style="color:red">There is no category available for selected department but you can update it without any category</p>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="color">Colour <small>(Requires only one. Example: Red)</small></label>
+                        <input type="text" class="form-control" name="color" id="product-color" required  value="{{product.color}}">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="size">Size</label>
+                        <div class="size-wrapper">
+                            <input id="sizes" hidden value="{{product.size}}">
+                            <div><input type="checkbox" name="size" id="sizexs" value="XS">XS</div>
+                            <div><input type="checkbox" name="size" id="sizess" value="S">S</div>
+                            <div><input type="checkbox" name="size" id="sizem" value="M">M</div>
+                            <div><input type="checkbox" name="size" id="sizel" value="L">L</div>
+                            <div><input type="checkbox" name="size" id="sizexl" value="XL">XL</div>
+                        </div>
+                        <script>
+                            var sizes = document.getElementById("sizes").value.split(",");
+                            for(var i = 0; i < sizes.length; i++)
+                            {
+                                if (sizes[i] == "XS") document.getElementById("sizexs").checked = true;
+                                else if (sizes[i] == "S") document.getElementById("sizess").checked = true;
+                                else if (sizes[i] == "M") document.getElementById("sizem").checked = true;
+                                else if (sizes[i] == "L") document.getElementById("sizel").checked = true;
+                                else if (sizes[i] == "XL") document.getElementById("sizexl").checked = true;
+                                
+                            }
+                        </script>
+
+
+                        <!--<input type="text" class="form-control" name="size" required>-->
+                    </div>
+
+                    <div class="form-group">
+                        <label for="quantity">Quantity</label>
+                        <input type="text" class="form-control" name="quantity" id="product-quantity" required  value="{{product.quantity}}">
+                    </div>
+                </div>
+            </div>
+
+            <div class="white-box pad20 mar20">
+                <div class="product-variant-wrapper">
+                    <div class="page-header admin-page-header title border-bottom">
+                        <div class="page-header-content" style="margin-top: -6px;">
+                            <h1>Variants</h1>
+                        </div>
+                        <div class="page-header-action add-new-inventory mar20">
+                            <a href="/dashboard/add-variant/{{product._id}}" class="btn btn-danger pad10">Add new variant</a>
+                        </div>
+                    </div>
+                    {{#if variants}}
+                        <div class="">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>Image</th>
+                                        <th>Color</th>
+                                        <th>Size</th>
+                                        <th>Quantity</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="bordered-tbody">
+                                    {{#each variants}}
+                                        <tr>
+                                            <td><img src="{{imagePath}}" width="20"></td>
+                                            <td>{{color}}</td>
+                                            <td>{{size}}</td>
+                                            <td>{{quantity}}</td>
+                                            <td>
+                                                <a href="/dashboard/update-variant/{{_id}}">Update</a> | 
+                                                <a href="/dashboard/delete-variant/{{_id}}">Delete</a>
+                                            </td>
+                                        </tr>
+                                    {{/each}}
+                                </tbody>
+                            </table>
+                        </div>
+                    {{else}}
+                        There is no variant added yet
+                    {{/if}}
+                    
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="white-box pad20 mar20">
+                <div class="original-product-wrapper">
+                    <div class="product-preview-title wrapper-title title text-center"><h4>Product Preview</h4></div>
+                    <div class="product-image" id="preview-product-image"><img src="{{product.imagePath}}" id="product-image"></div>
+                    <div class="preview-product-title title" id="preview-product-title">{{product.title}}</div>
+                    <div class="preview-product-description" id="preview-product-description">{{product.description}}</div>
+                    <div class="preview-product-price" id="preview-product-price">${{product.price}} CAD</div>
+                </div>
+            </div>
+
+            <div class="white-box pad20 additional-save-button">
+                <a href="/dashboard/inventory" class="btn btn-default pad10">Cancel</a>
+                <button type="submit" class="btn btn-primary pad10" onclick="updateProductPost()">Save</button>
+            </div>
+        </div>
+    </div>
+
+
+
+
+<input type="text" hidden value="{{departments}}" id="allDepartments">
+<input type="text" hidden value="{{product._id}}" id="productID">
+<input type="text" hidden value="{{product.category}}" id="item-category">
+<input type="text" hidden value="{{product.department}}" id="item-department">
+
+<script>
+    var category = document.getElementById("item-category").value;
+    var department = document.getElementById("item-department").value;
+
+    
+    if (department != "")
+    {
+        var selectedDepartment = document.getElementById("draggable-area");
+        var p = document.createElement("p")
+        p.setAttribute('id', department)
+        p.setAttribute('class', 'draggable-item')
+        p.setAttribute('draggable', 'true')
+        p.setAttribute('ondragstart', 'drag(event)')
+        p.appendChild(document.createTextNode(department))
+        selectedDepartment.appendChild(p)
+
+        var availableDepartments = document.getElementById("draggable-area-departments")
+        var availableDepartmentsList = availableDepartments.getElementsByTagName("*")
+        if(availableDepartmentsList.length > 0)
+        {
+            for (let x = 0; x < availableDepartmentsList.length; x++)
+            {
+                if (availableDepartmentsList[x].id == department)
+                {
+                    availableDepartments.removeChild(availableDepartmentsList[x])
+                    break
+                }
+            }
+        }
+    }
+
+    //[{"_id":"5bd38d72bba97d28d42a5031","departmentName":"Woman","categories":"","__v":0},{"_id":"5bd38e75864dfa2941b0f5db","departmentName":"Man","categories":"Palto,Jacket New","__v":0}]
+    //<p id="Palto" class="draggable-item" draggable="true" ondragstart="drag(event)">Palto</p>
+    if (category != "")
+    {
+        document.getElementById("categories-wrapper").style.display = "block"
+        var selectedCategory = document.getElementById("draggable-area-selected");
+        var p = document.createElement("p")
+        p.setAttribute('id', category)
+        p.setAttribute('class', 'draggable-item')
+        p.setAttribute('draggable', 'true')
+        p.setAttribute('ondragstart', 'drag(event)')
+        p.appendChild(document.createTextNode(category))
+        selectedCategory.appendChild(p)
+
+
+
+        
+        var availableCategories = document.getElementById("draggable-area-Categories")
+        var departmentList = JSON.parse(document.getElementById("navbar-list-items").value)
+
+        for (let z = 0; z < departmentList.length; z++)
+        {
+            if(departmentList[z].departmentName == department)
+            {
+                var categories = departmentList[z].categories.split(",")
+                for (let l = 0; l < categories.length; l++)
+                {
+                    var p = document.createElement("p")
+                    p.setAttribute('id', categories[l])
+                    p.setAttribute('class', 'draggable-item')
+                    p.setAttribute('draggable', 'true')
+                    p.setAttribute('ondragstart', 'drag(event)')
+                    p.appendChild(document.createTextNode(categories[l]))
+                    availableCategories.appendChild(p)
+                }
+            }
+        }
+
+        
+        var availableCategoriesList = availableCategories.getElementsByTagName("*")
+        if(availableCategoriesList.length > 0)
+        {
+            for (let x = 0; x < availableCategoriesList.length; x++)
+            {
+                if (availableCategoriesList[x].id == category)
+                {
+                    availableCategories.removeChild(availableCategoriesList[x])
+                    break
+                }
+            }
+        }
+    }
+    else
+    {
+        var availableCategories = document.getElementById("draggable-area-Categories")
+        var departmentList = JSON.parse(document.getElementById("navbar-list-items").value)
+
+        for (let z = 0; z < departmentList.length; z++)
+        {
+            if(departmentList[z].departmentName == department)
+            {
+                var categories = departmentList[z].categories.split(",")
+                for (let l = 0; l < categories.length; l++)
+                {
+                    if (categories[0] != "")
+                    {
+                        document.getElementById("categories-wrapper").style.display = "block"
+                        var p = document.createElement("p")
+                        p.setAttribute('id', categories[l])
+                        p.setAttribute('class', 'draggable-item')
+                        p.setAttribute('draggable', 'true')
+                        p.setAttribute('ondragstart', 'drag(event)')
+                        p.appendChild(document.createTextNode(categories[l]))
+                        availableCategories.appendChild(p)
+                    }
+                    else
+                    {
+                        document.getElementById("categories-wrapper-empty-category").style.display = "block"
+                    }
+                }
+            }
+        }
+        
+    }
+
+
+
+
+</script>
+
+
+
+

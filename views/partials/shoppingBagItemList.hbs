@@ -1,0 +1,25 @@
+<table class="table">
+    <thead>
+        <tr>
+            <th class="text-left">id</th>
+            <th class="text-left">photo</th>
+            <th class="text-left">Title</th>
+            <th class="text-center">Qty</th>
+            <th class="text-right">Price</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each items}}
+            <tr>
+                <td>{{this.item._id}}</td>
+                <td><img src="{{this.item.imagePath}}" height="30"></td>
+                <td class="text-left">{{#if this.item.title}}{{this.item.title}}{{else}}{{this.item.size}}{{/if}}</td>
+                <td class="text-center"><a href="/decrease/{{this.item._id}}" class="btn btn-default shopping-actions">-</a> {{this.qty}} <a href="/increase/{{this.item._id}}" class="btn btn-default shopping-actions">+</a></td>
+                <td class="text-right">${{this.price}}</td>
+            </tr>
+        {{/each}}
+    </tbody>
+</table>
+<div class="payment-total-wrapper">
+    <div class="total-amount"><span>Total: </span>${{totalPrice}}</div>
+</div>

@@ -1,0 +1,24 @@
+<!-- Filter starts -->
+<div class="filter-wrapper">
+    <div class="filter-title title border-bottom"><i class="fa fa-sort-amount-desc" aria-hidden="true"></i> Filters</div>
+    <form action="filters" method="POST">
+        <div class="filter-criterias">
+            <div class="checkbox checkbox-success">
+                <input name="lowPrice" id="lowPrice" type="checkbox">
+                <label for="lowPrice">
+                    Less than $30.00
+                </label>
+            </div>
+            <div class="checkbox checkbox-success">
+                <input name="highPrice" id="highPrice" type="checkbox">
+                <label for="highPrice">
+                    More than $30.00
+                </label>
+            </div>
+        </div>
+        <div class="filter-button">
+            <button type="submit" class="btn btn-primary full-width">Apply</button>
+        </div>
+    </form>
+</div>
+<!-- Filter ends -->

@@ -1,0 +1,35 @@
+<div class="white-box pad20">
+    <div class="page-header admin-page-header title border-bottom">
+        <div class="page-header-back-button">
+            <a href="/dashboard"><i class="fa fa-angle-left" aria-hidden="true"></i></a>
+        </div>
+        <div class="page-header-content">
+            <h1>{{title}}</h1>
+        </div>
+        <div class="page-header-action add-new-inventory mar20">
+            <a href="/dashboard/insert-category" class="btn btn-primary pad10">Add a new category</a>
+        </div>
+    </div>
+    
+    
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Category Name</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody class="bordered-tbody">
+            {{#each categories}}
+                <tr>
+                    <!--<th scope="row">{{_id}}</th>-->
+                    <td>{{categoryName}}</td>
+                    <td>
+                        <a href="/dashboard/update-category/{{_id}}">Update</a> | 
+                        <a href="/dashboard/delete-category/{{_id}}">Delete</a>
+                    </td>
+                </tr>
+            {{/each}}
+        </tbody>
+    </table>
+</div>

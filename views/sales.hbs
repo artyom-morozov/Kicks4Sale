@@ -1,0 +1,41 @@
+<div class="white-box pad20">
+    <div class="page-header admin-page-header title border-bottom">
+        <div class="page-header-back-button">
+            <a href="/dashboard"><i class="fa fa-angle-left" aria-hidden="true"></i></a>
+        </div>
+        <div class="page-header-content">
+            <h1>{{title}}</h1>
+            <small class="title"></small>
+        </div>
+        <div class="page-header-action add-new-inventory mar20">
+        </div>
+    </div>
+    
+    {{#if sales}}
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Payment #</th>
+                <th>User</th>
+                <th>Shipping Address</th>
+                <th>Order Date</th>
+                <th>Shipping</th>
+                <th>Amount</th>
+            </tr>
+        </thead>
+        <tbody class="bordered-tbody">
+            {{#each sales}}
+                <tr>
+                    <th scope="row">{{orderID}}</th>
+                    <td>{{username}}</td>
+                    <td>{{address}}</td>
+                    <td>{{orderDate}}</td>
+                    <td>{{shipping}}</td>
+                    <td>${{total}} CAD</td>
+                </tr>
+            {{/each}}
+        </tbody>
+    </table>
+    {{/if}}
+    There is no sales
+</div>

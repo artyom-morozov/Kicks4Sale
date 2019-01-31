@@ -1,0 +1,102 @@
+<form action="/dashboard/add-variant/{{product._id}}" method="POST">
+    <div class="white-box pad20 mar20">
+        <div class="page-header admin-page-header title border-bottom" style="margin-bottom:0px;">
+            <div class="page-header-back-button">
+                <a href="/dashboard/inventory"><i class="fa fa-angle-left" aria-hidden="true"></i></a>
+            </div>
+            <div class="page-header-content">
+                <h1>Add a variant</h1>
+                <small class="title">You can always change it later</small>
+            </div>
+            <div class="page-header-action add-new-inventory mar20">
+                <a href="/dashboard/inventory" class="btn btn-default pad10">Cancel</a>
+                <button type="submit" class="btn btn-primary pad10">Save</button>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-8">
+            <div class="white-box pad20 mar20">
+                <div class="item-group">
+                    <div class="form-group">
+                        <label for="imagePath">Variant Image Link</label>
+                        <input type="text" class="form-control" name="imagePath" required id="imagePath" onkeyup="updatePreviewBox('imagePath', 'preview-product-image')">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="color">Colour <small>(Requires only one. Example: Red)</small></label>
+                        <input type="text" class="form-control" name="color" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="size">Size</label>
+                        <div class="size-wrapper">
+                            <div><input type="checkbox" name="size" value="XS">XS</div>
+                            <div><input type="checkbox" name="size" value="S">S</div>
+                            <div><input type="checkbox" name="size" value="M">M</div>
+                            <div><input type="checkbox" name="size" value="L">L</div>
+                            <div><input type="checkbox" name="size" value="XL">XL</div>
+                        </div>
+                        <!--<input type="text" class="form-control" name="size" required>-->
+                    </div>
+                    <div class="form-group">
+                        <label for="quantity">Quantity <small>Number of quantity for this variant</small></label>
+                        <input type="text" class="form-control" name="quantity" required>
+                    </div>
+                </div>
+            </div>
+
+            <div class="white-box pad20">
+                <div class="product-variant-wrapper">
+                    <div class="page-header admin-page-header title border-bottom">
+                        <div class="page-header-content" style="margin-top: -6px;">
+                            <h1>Other variants</h1>
+                        </div>
+                    </div>
+                    {{#if variants}}
+                        <div class="">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>Image</th>
+                                        <th>Color</th>
+                                        <th>Size</th>
+                                        <th>Quantity</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="bordered-tbody">
+                                    {{#each variants}}
+                                        <tr>
+                                            <td><img src="{{imagePath}}" width="20"></td>
+                                            <td>{{color}}</td>
+                                            <td>{{size}}</td>
+                                            <td>{{quantity}}</td>
+                                        </tr>
+                                    {{/each}}
+                                </tbody>
+                            </table>
+                        </div>
+                    {{else}}
+                        There is no variant added yet
+                    {{/if}}
+                    
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="white-box pad20 mar20">
+                <div class="original-product-wrapper">
+                    <div class="product-preview-title wrapper-title title text-center"><h4>Product Preview</h4></div>
+                    <div class="product-image" id="preview-product-image"><img src="{{product.imagePath}}" id="product-image"></div>
+                    <div class="preview-product-title title" id="preview-product-title">{{product.title}}</div>
+                    <div class="preview-product-description" id="preview-product-description">{{product.description}}</div>
+                    <div class="preview-product-price" id="preview-product-price">${{product.price}} CAD</div>
+                </div>
+            </div>
+            <div class="white-box pad20 additional-save-button">
+                <a href="/dashboard/inventory" class="btn btn-default pad10">Cancel</a>
+                <button type="submit" class="btn btn-primary pad10">Save</button>
+            </div>
+        </div>
+    </div>
+</form>

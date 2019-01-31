@@ -1,0 +1,39 @@
+
+
+<div class="row">
+    <div class="col-md-12 col-centered">
+        <div class="order-history-wrapper white-box border-around pad20">
+            <div class="order-history-title title">
+                <h1>Order History</h1>
+            </div>
+            <div class="order-history-description">
+                {{#if orders}}
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th class="text-left">Order ID</th>
+                            <th class="text-center">Address</th>
+                            <th class="text-center">OrderDate</th>
+                            <th class="text-right">Shipping</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{#each orders}}
+                            <tr>
+                                <td class="text-left">{{orderID}}</td>
+                                <td class="text-center">{{address}}</td>
+                                <td class="text-center">{{orderDate}}</td>
+                                <td class="text-right">{{shipping}}</td>
+                            </tr>
+                        {{/each}}
+                    </tbody>
+                </table>
+                {{else}}
+                <div class="empty-order">
+                    You do not have any order
+                </div>
+                {{/if}}
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,144 @@
+<!-- Header starts -->
+<header class="site-header {{customNavbar}}">
+  {{#if user.admin}}
+  <nav class="navbar-black navbar-fixed-top navbar-inside">
+    <div class="container">
+      <style>
+        .general-navbar{
+          top:34px;
+        }
+        .site-header {
+            display: block;
+            min-height: 90px;
+        }
+      </style>
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="admin-header">
+        <div class="navbar-form navbar-left">
+          Welcome Admin  
+        </div>
+        <div class="navbar-form navbar-right">
+          <a href="/dashboard" class="dashboard-link" id="go-to-link" title="Go to dashboard">Go to dashboard</a>
+        </div>
+      </div>
+
+      </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+  </nav>
+  {{/if}}
+
+  <nav class="navbar navbar-default navbar-fixed-top navbar-inside general-navbar">
+      <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/" id="navbar-logo"><img src="/images/logo.png"></a>
+        </div>
+    
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <div class="navbar-form navbar-left search-bar">
+            <input type="text" hidden id="navbar-list-items" value="{{session.department}}">
+            <form class="navbar-form navbar-left" role="search" method="post" action="/search" >
+              <div class="form-group">
+                <input autocomplete="off" type="text" class="form-control searchbox-textfield border-around" name="query" onkeyup="showResults(this.value)" placeholder="Search for product or category">
+              </div>
+              <button type="submit" class="btn btn-primary search-button-top"><i class="fa fa-search" aria-hidden="true"></i></button>
+              <div class="product-search-wrapper">
+                <div id="search-results" class="border-around"></div>
+              </div>
+            </form>
+          </div>
+          <ul class="nav navbar-nav navbar-right" id="main-navbar">
+            <li><a href="/">All Products</a></li>
+            <li><a href="/shopping-bag"><i class="fa fa-shopping-basket" aria-hidden="true"></i> Shopping Bag <span class="badge">{{session.cart.totalQty}}</span></a></li>
+            <li class="dropdown user-info">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Hello, {{user.fullname}}<span class="caret"></span></a>
+              <ul class="dropdown-menu custom-navbar-dropdown">
+                <li><a href="/order-history"><i class="fa fa-history" aria-hidden="true"></i> Order History</a></li>
+                <li role="separator" class="divider"></li>
+                <li><a href="/users/logout"><i class="fa fa-sign-out" aria-hidden="true"></i> Logout</a></li>
+              </ul>
+            </li>
+          </ul>
+
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+</header>
+<!-- Header ends -->
+
+<script>
+  var data = JSON.parse(document.getElementById("navbar-list-items").value)
+  for (let i = 0; i < data.length; i++)
+  {
+    if (data[i].categories)
+    {
+      var liDropdown = document.createElement("li");
+      liDropdown.setAttribute('class','dropdown')
+      
+      var dropdownLink = document.createElement("a");
+      dropdownLink.setAttribute('href','#')
+      dropdownLink.setAttribute('class','dropdown-toggle')
+      dropdownLink.setAttribute('data-toggle','dropdown')
+      dropdownLink.setAttribute('role','button')
+      dropdownLink.setAttribute('aria-haspopup','true')
+      dropdownLink.setAttribute('aria-expanded','false')
+      dropdownLink.appendChild(document.createTextNode(data[i].departmentName))
+
+      var caret = document.createElement("span")
+      caret.setAttribute('class', 'caret')
+      dropdownLink.appendChild(caret)
+
+      var categories = data[i].categories.split(",")
+
+      var ul = document.createElement("ul");
+      ul.setAttribute('class', 'dropdown-menu')
+      ul.setAttribute('id', data[i]._id)
+
+      // add all categories to dropdown
+      for (let x = 0; x < categories.length; x++)
+      {
+        var li = document.createElement("li");
+        var href = document.createElement("a");
+        href.setAttribute('href','/product-list/' + data[i].departmentName + "/" + categories[x])
+        href.appendChild(document.createTextNode(categories[x]))
+        li.appendChild(href)
+        ul.appendChild(li)
+      }
+
+      // add all departments to dropdown
+      li = document.createElement("li");
+      href = document.createElement("a");
+      href.setAttribute('href','/product-list/' + data[i].departmentName)
+      href.appendChild(document.createTextNode("All " + data[i].departmentName + " Products"))
+      li.appendChild(href)
+      ul.appendChild(li)
+
+      liDropdown.appendChild(dropdownLink)
+      liDropdown.appendChild(ul)
+      var element = document.getElementById("main-navbar")
+      element.insertBefore(liDropdown, element.firstChild);
+      //document.getElementById("main-navbar").appendChild(liDropdown);
+    }
+    else
+    {
+      // add department to navbar
+      var node = document.createElement("li");
+      var href = document.createElement("a");
+      href.setAttribute('href','/product-list/' + data[i].departmentName)
+      node.appendChild(href)
+      var textnode = document.createTextNode(data[i].departmentName);
+      href.appendChild(textnode);
+      var element = document.getElementById("main-navbar")
+      element.insertBefore(node, element.firstChild);
+    }
+    
+  }
+  
+</script>

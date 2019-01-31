@@ -1,0 +1,22 @@
+
+
+{{#if products}}
+    {{#each products}}
+        <!-- Product starts -->
+        <div class="col-md-3">
+            <div class="product-wrapper">
+                <div class="product-image-list"><a href="/product-overview/{{_id}}"><img src="{{imagePath}}"></a></div>
+                <div class="product-title">{{title}}</div>
+                <div class="product-price">${{price}} CAD</div>
+            </div>
+        </div>
+        
+        <!-- Product ends -->
+    {{/each}}
+{{else}}
+    <div class="col-md-12 text-center">
+        <div class="white-box pad20 mar20 border-around">
+            no product available
+        </div>
+    </div>
+{{/if}}

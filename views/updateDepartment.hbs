@@ -1,0 +1,94 @@
+<div class="white-box pad20">
+        <div class="page-header admin-page-header title border-bottom">
+            <div class="page-header-back-button">
+                <a href="/dashboard/departments"><i class="fa fa-angle-left" aria-hidden="true"></i></a>
+            </div>
+            <div class="page-header-content">
+                <h1>{{title}}</h1>
+                <small class="title"></small>
+            </div>
+            <div class="page-header-action add-new-inventory mar20">
+                <a href="/dashboard/departments" class="btn btn-default pad10">Cancel</a>
+                <button type="submit" class="btn btn-primary pad10" onclick="sendPostUpdateRequest(event)">Save</button>
+            </div>
+        </div>
+        
+        
+        <div class="item-group">
+            <div class="form-group">
+                <label for="departmentName">Department Name</label>
+                <input type="text" class="form-control" name="departmentName" id="departmentName" value="{{department.departmentName}}">
+            </div>
+
+            <div class="form-group drag-and-drop">
+                <input type="text" hidden id="alreadySelectedCategories" value="{{department.categories}}">
+                <input type="text" hidden id="departmentID" value="{{department._id}}">
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <label for="selectedCategories">Selected Categories <small>(Drag and drop from all categories)</small></label>
+                        <div class="draggable-area" id="draggable-area" ondrop="drop(event)" name="selectedCategories" ondragover="allowDrop(event)"></div>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="allCategories">All Categories</label>
+                        {{#if categories}}
+                            <div class="draggable-area" id="draggable-area-Categories" name="allCategories" ondrop="drop(event)" ondragover="allowDrop(event)">
+                                {{#each categories}}
+                                    <p id="{{categoryName}}" class="draggable-item" draggable="true" ondragstart="drag(event)">{{categoryName}}</p>
+                                {{/each}}
+                            </div>
+                        {{else}}
+                            <a href="/dashboard/insert-category" class="btn btn-danger pad10">Add a new category</a>
+                        {{/if}}
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+
+</div>
+
+
+<script>
+    //<p id="{{categoryName}}" class="draggable-item" draggable="true" ondragstart="drag(event)">{{categoryName}}</p>
+
+    var selectedCategoriesContainer = document.getElementById("draggable-area")
+
+    var selectedCategories = document.getElementById("alreadySelectedCategories").value.split(",")
+    if (selectedCategories.length == 1 && selectedCategories[0] == "")
+    {
+
+    }
+    else
+    {
+        for (let i = 0; i < selectedCategories.length; i++)
+        {
+            var p = document.createElement("p")
+            p.setAttribute('id', selectedCategories[i])
+            p.setAttribute('class', 'draggable-item')
+            p.setAttribute('draggable', 'true')
+            p.setAttribute('ondragstart', 'drag(event)')
+            let data = document.createTextNode(selectedCategories[i])
+            p.appendChild(data)
+            selectedCategoriesContainer.appendChild(p)
+        }
+
+
+        var categoriesContainer = document.getElementById("draggable-area-Categories").getElementsByTagName("*")
+        var categoriesList = document.getElementById("draggable-area-Categories")
+        for (var x = 0; x < categoriesContainer.length; x++)
+        {
+            for (var y = 0; y < selectedCategories.length; y++)
+            {
+                if(categoriesContainer[x].id == selectedCategories[y])
+                {
+                    categoriesList.removeChild(categoriesContainer[x])
+                }
+            }
+        }
+    }
+
+</script>
+
+
+
