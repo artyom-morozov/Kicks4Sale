@@ -26,7 +26,7 @@ install the dependencies in package.json file by executing "npm install" in the 
  execute the app with "npm start" in the console 
  to test visit http://localhost:3000
 	or visit
-	http://134.117.216.140:3000/users/login
+	https://calm-journey-37145.herokuapp.com/users/login
 
 #
 ==================================================================
@@ -39,7 +39,7 @@ Paypal Sandbox accout:
 login: sviktam1-buyer@gmail.com
 password: 1632JopaSlona 
 
-Live Server URL: http://134.117.216.140:3000/users/login
+Live Server URL:https://calm-journey-37145.herokuapp.com/users/login
 
 USER#1
 user login: admin@admin.com
