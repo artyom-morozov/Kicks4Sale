@@ -1,4 +1,4 @@
-# KicksSale
+# Kicks4Sale
 E-commerse trainers store application.
 Checkout site demo at https://calm-journey-37145.herokuapp.com/users/login
 
