@@ -19,7 +19,7 @@
     "express-validator": ">=4.3.0",
     "handlebars.moment": "^1.0.4",
     "mongodb": ">=2.2.33",
-    "mongoose": ">=4.13.5",
+    "mongoose": ">=5.7.5",
     "morgan": "^1.9.1",
     "nodemailer": "^4.6.8",
     "passport": ">=0.4.0",
