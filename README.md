@@ -1,5 +1,5 @@
 # Kicks4Sale
-E-commerse trainers store application.
+Full-stack web application for an e-commerce shopping platform that specializes in selling trainers. The app is built with Node.js, Express.js and has a MongoDB database. Payment processing is done through PayPal API..
 Checkout site demo at https://calm-journey-37145.herokuapp.com/users/login
 
 ### Deployment 
