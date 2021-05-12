@@ -21,7 +21,7 @@
     "mongodb": ">=2.2.33",
     "mongoose": ">=4.13.5",
     "morgan": "^1.9.1",
-    "nodemailer": "^4.6.8",
+    "nodemailer": "^6.4.16",
     "passport": ">=0.4.0",
     "passport-local": ">=1.0.0",
     "paypal-rest-sdk": "^1.8.1",
